@@ -69,6 +69,8 @@ public class FoodEventHandler
                 hungerLossRate *= 5F/3F;
             else if (difficulty == EnumDifficulty.EASY)
                 hungerLossRate *= 4F/3F;
+            else if (IguanaConfig.harderScalingHunger && difficulty == EnumDifficulty.HARD)
+                hungerLossRate *= 2F/3F;
         }
         event.maxExhaustionLevel = hungerLossRate;
     }

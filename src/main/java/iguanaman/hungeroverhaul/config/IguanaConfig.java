@@ -175,8 +175,11 @@ public class IguanaConfig
     public static boolean difficultyScalingEffects;
     public static final ConfigOption<Boolean> difficultyScalingHealingOption = addOption(CATEGORY_DIFFICULTY_SCALING, "difficultyScalingHealing", true, false, "Healing rate scales by difficulty ('difficultyScaling' must be true)");
     public static boolean difficultyScalingHealing;
-    public static final ConfigOption<Boolean> difficultyScalingHungerOption = addOption(CATEGORY_DIFFICULTY_SCALING, "difficultyScalingHunger", true, false, "Hunger loss rate scales by difficulty ('difficultyScaling' must be true)");
+    public static final ConfigOption<Boolean> difficultyScalingHungerOption = addOption(CATEGORY_DIFFICULTY_SCALING, "difficultyScalingHunger", true, false, "Hunger loss rate is reduced relative to difficulty ('difficultyScaling' must be true)");
     public static boolean difficultyScalingHunger;
+    public static final ConfigOption<Boolean> harderScalingHungerOption = addOption(CATEGORY_DIFFICULTY_SCALING, "harderScalingHunger", true, false, "Hunger loss rate is increased in Hard ('difficultyScalingHunger' and 'difficultyScaling' must be true)");
+    public static boolean harderScalingHunger;
+
     public static final ConfigOption<Boolean> difficultyScalingRespawnHungerOption = addOption(CATEGORY_DIFFICULTY_SCALING, "difficultyScalingRespawnHunger", true, false, "Hunger value after respawn is affected by difficulty ('difficultyScaling' must be true)");
     public static boolean difficultyScalingRespawnHunger;
 
@@ -241,7 +244,7 @@ public class IguanaConfig
     public static int respawnHungerDifficultyModifier;
     public static final ConfigOption<Boolean> disableHealingHungerDrainOption = addOption(CATEGORY_HUNGER, "disableHealingHungerDrain", true, false, "Disable the hunger drain when healing that was introduced in vanilla 1.6.2");
     public static boolean disableHealingHungerDrain;
-    public static final ConfigOption<Float> hungerLossRatePercentageOption = addOption(CATEGORY_HUNGER, "hungerLossRatePercentage", 4F/3F * 100F, 0F, null, 100F, "Speed up or slow down the rate that hunger drops (set to 0 to disable hunger loss)");
+    public static final ConfigOption<Float> hungerLossRatePercentageOption = addOption(CATEGORY_HUNGER, "hungerLossRatePercentage", 100F, 0F, null, 100F, "Speed up or slow down the rate that hunger drops (set to 0 to disable hunger loss)");
     public static float hungerLossRatePercentage;
 
     // low stat
@@ -462,6 +465,7 @@ public class IguanaConfig
         difficultyScalingEffects = difficultyScalingEffectsOption.get(config) && difficultyScaling;
         difficultyScalingHealing = difficultyScalingHealingOption.get(config) && difficultyScaling;
         difficultyScalingHunger = difficultyScalingHungerOption.get(config) && difficultyScaling;
+        harderScalingHunger = harderScalingHungerOption.get(config) && difficultyScaling;
         difficultyScalingRespawnHunger = difficultyScalingRespawnHungerOption.get(config) && difficultyScaling;
         modifyFoodValues = modifyFoodValuesOption.get(config);
         useHOFoodValues = useHOFoodValuesOption.get(config);
