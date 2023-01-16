@@ -13,18 +13,15 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import squeek.applecore.api.food.FoodValues;
 
-public class ModuleVanilla
-{
-    public static void init()
-    {
+public class ModuleVanilla {
+    public static void init() {
         if (IguanaConfig.addSeedsCraftingRecipe)
             GameRegistry.addRecipe(new ShapelessOreRecipe(Items.wheat_seeds, Items.wheat));
 
         /*
          * Food values
          */
-        if (IguanaConfig.modifyFoodValues && IguanaConfig.useHOFoodValues)
-        {
+        if (IguanaConfig.modifyFoodValues && IguanaConfig.useHOFoodValues) {
             FoodModifier.setModifiedFoodValues(Items.apple, new FoodValues(1, 0.05F));
             FoodModifier.setModifiedFoodValues(Items.bread, new FoodValues(3, 0.2F));
             FoodModifier.setModifiedFoodValues(Items.porkchop, new FoodValues(1, 0.05F));
@@ -83,8 +80,8 @@ public class ModuleVanilla
                 .setBiomeGrowthModifier(Type.SANDY, 1);
         ModulePlantGrowth.registerPlantGrowthModifier(BlockCactus.class, cactusGrowthModification);
 
-        PlantGrowthModification saplingGrowthModification = new PlantGrowthModification()
-                .setGrowthTickProbability(IguanaConfig.saplingRegrowthMultiplier);
+        PlantGrowthModification saplingGrowthModification =
+                new PlantGrowthModification().setGrowthTickProbability(IguanaConfig.saplingRegrowthMultiplier);
         ModulePlantGrowth.registerPlantGrowthModifier(BlockSapling.class, saplingGrowthModification);
 
         PlantGrowthModification netherWartGrowthModification = new PlantGrowthModification()
@@ -96,13 +93,12 @@ public class ModuleVanilla
         /*
          * Bonemeal
          */
-        BonemealModification cropBonemealModification = new BonemealModification()
-        {
+        BonemealModification cropBonemealModification = new BonemealModification() {
             @Override
-            public int getNewMeta(World world, int x, int y, int z, Block block, int currentMeta)
-            {
+            public int getNewMeta(World world, int x, int y, int z, Block block, int currentMeta) {
                 int metaIncrease = 1;
-                if (IguanaConfig.difficultyScalingBoneMeal && world.difficultySetting.getDifficultyId() < EnumDifficulty.EASY.getDifficultyId())
+                if (IguanaConfig.difficultyScalingBoneMeal
+                        && world.difficultySetting.getDifficultyId() < EnumDifficulty.EASY.getDifficultyId())
                     metaIncrease = world.rand.nextInt(3);
                 return Math.min(currentMeta + metaIncrease, 7);
             }
